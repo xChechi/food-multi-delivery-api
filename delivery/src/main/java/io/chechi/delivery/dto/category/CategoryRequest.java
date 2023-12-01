@@ -18,4 +18,6 @@ public class CategoryRequest {
     @Size(min = 2)
     private String description;
 
+    private byte[] imageData;
+
 }

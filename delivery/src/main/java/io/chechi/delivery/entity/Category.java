@@ -27,4 +27,12 @@ public class Category {
     @NotBlank
     @Size(min = 2)
     private String description;
+
+    @Lob
+    @Column(name = "image_data", columnDefinition = "LONGBLOB")
+    private byte[] imageData;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 }

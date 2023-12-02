@@ -1,5 +1,6 @@
 package io.chechi.delivery.dto.category;
 
+import io.chechi.delivery.dto.restaurant.RestaurantShortResponse;
 import lombok.*;
 
 @AllArgsConstructor
@@ -14,5 +15,7 @@ public class CategoryResponse {
     private String name;
 
     private String description;
+
+    private RestaurantShortResponse restaurant;
 
 }

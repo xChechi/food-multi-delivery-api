@@ -1,4 +1,4 @@
-package io.chechi.delivery.annotation;
+package io.chechi.delivery.util;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

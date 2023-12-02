@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "categories")
@@ -27,6 +28,9 @@ public class Category {
     @NotBlank
     @Size(min = 2)
     private String description;
+
+    @Transient
+    private MultipartFile file;
 
     @Lob
     @Column(name = "image_data", columnDefinition = "LONGBLOB")

@@ -37,15 +37,13 @@ public class RestaurantRequest {
 
     private MultipartFile file;
 
-    @Lob
-    @Column(name = "image_data", columnDefinition = "LONGBLOB")
-    private byte[] imageData;
+    //private byte[] imageData;
 
     @NotNull
     private Double deliveryCost;
 
-    @NotNull
-    private Double reviewStat;
+    //@NotNull
+    //private Double reviewStat;
 
     @NotNull
     private Double minimumOrder;

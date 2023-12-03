@@ -14,8 +14,6 @@ public class TestResponse {
 
     private String name;
 
-    private String imageData;
-
     private String fullImageUrl;
 
 }

@@ -37,13 +37,13 @@ public class RestaurantDetailedResponse {
     @Email
     private String email;
 
-    private String imageData;
+    private String imageUrl;
 
     @NotNull
     private Double deliveryCost;
 
-    @NotNull
-    private Double reviewStat;
+    //@NotNull
+    //private Double reviewStat;
 
     @NotNull
     private Double minimumOrder;

@@ -9,6 +9,7 @@ import io.chechi.delivery.exception.RestaurantNotExistException;
 import io.chechi.delivery.repository.RestaurantRepository;
 import io.chechi.delivery.service.RestaurantService;
 import io.chechi.delivery.util.MultipartFileToByteArrayConverter;
+import io.chechi.delivery.util.SaveImageToFile;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,13 +24,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final RestaurantConverter restaurantConverter;
     private final MultipartFileToByteArrayConverter imageConverter;
+    private final SaveImageToFile saveImageToFile;
 
     @Override
     public List<RestaurantDetailedResponse> findAll() {
 
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         return restaurantList.stream()
-                .map(restaurantConverter::toResponse)
+                .map(restaurant -> restaurantConverter.toResponse(restaurant, saveImageToFile.imageUrlFor(restaurant.getId(), restaurant.getName())))
                 .toList();
     }
 
@@ -37,18 +39,24 @@ public class RestaurantServiceImpl implements RestaurantService {
     public RestaurantDetailedResponse findById(Integer id) {
 
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(() -> new RestaurantNotExistException("Restaurant not found"));
-        return restaurantConverter.toResponse(restaurant);
+
+        return restaurantConverter.toResponse(restaurant, saveImageToFile.imageUrlFor(restaurant.getId(), restaurant.getName()));
     }
 
     @Override
     public RestaurantDetailedResponse addRestaurant(RestaurantRequest request) {
         try {
             byte[] imageData = imageConverter.convert(request.getFile());
-            //request.setFile(file); // Set the file in the request if needed in conversion
 
             Restaurant restaurant = restaurantConverter.addRestaurant(request, imageData);
             Restaurant savedRestaurant = restaurantRepository.save(restaurant);
-            return restaurantConverter.toResponse(savedRestaurant);
+
+            String imageUrl = saveImageToFile.saveToFile(restaurant.getId(), restaurant.getName(), request.getFile());
+
+            RestaurantDetailedResponse response = restaurantConverter.toResponse(savedRestaurant, imageUrl);
+            response.setImageUrl(imageUrl);
+
+            return restaurantConverter.toResponse(savedRestaurant, imageUrl);
         } catch (IOException e) {
             throw new ImageConversionException("Error occurred during image conversion");
         }

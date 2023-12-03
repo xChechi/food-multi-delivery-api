@@ -39,19 +39,7 @@ public class RestaurantConverter {
         }
 
 
-    public RestaurantDetailedResponse toResponse (Restaurant restaurant) {
-
-        byte[] imageData = restaurant.getImageData();
-        String base64ImageData = Base64.getEncoder().encodeToString(imageData);
-
-        String compressedBase64ImageData;
-        try {
-            compressedBase64ImageData = compressBase64String.convert(base64ImageData);
-        } catch (IOException e) {
-            // Handle compression error appropriately
-            //throw new ImageCompressionException("Error compressing image data");
-            throw new RuntimeException();
-        }
+    public RestaurantDetailedResponse toResponse (Restaurant restaurant, String imageUrl) {
 
         return RestaurantDetailedResponse.builder()
                 .id(restaurant.getId())
@@ -60,7 +48,7 @@ public class RestaurantConverter {
                 .address(restaurant.getAddress())
                 .phoneNumber(restaurant.getPhoneNumber())
                 .email(restaurant.getEmail())
-                .imageData(compressedBase64ImageData)
+                .imageUrl(imageUrl)
                 .deliveryCost(restaurant.getDeliveryCost())
                 .deliveryTime(restaurant.getDeliveryTime())
                 //review

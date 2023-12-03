@@ -34,9 +34,9 @@ public class TestServiceImpl implements TestService {
             Test test = testConverter.addTest(testRequest, imageData);
             Test savedTest = testRepository.save(test);
 
-            String imageUrl = saveImageToFile.saveToFile(test.getId(), testRequest.getFile());
+            String imageUrl = saveImageToFile.saveToFile(test.getId(), test.getName(), testRequest.getFile());
 
-            System.out.println("----------------------------->" + test.getId());
+            //System.out.println("----------------------------->" + test.getId());
 
             TestResponse testResponse = testConverter.toResponse(savedTest, imageUrl);
             testResponse.setFullImageUrl(imageUrl);

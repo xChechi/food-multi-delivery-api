@@ -23,15 +23,11 @@ public class TestConverter {
     }
 
     public TestResponse toResponse(Test test, String imageUrl) {
-        byte[] imageData = test.getImageData();
-        String base64ImageData = Base64.getEncoder().encodeToString(imageData);
-
 
         return TestResponse.builder()
                 .id(test.getId())
                 .name(test.getName())
                 .fullImageUrl(imageUrl)
-                //.imageData(base64ImageData)
                 .build();
     }
 }

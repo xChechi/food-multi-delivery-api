@@ -29,9 +29,6 @@ public class Category {
     @Size(min = 2)
     private String description;
 
-    @Transient
-    private MultipartFile file;
-
     @Lob
     @Column(name = "image_data", columnDefinition = "LONGBLOB")
     private byte[] imageData;

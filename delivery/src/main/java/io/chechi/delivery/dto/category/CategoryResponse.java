@@ -16,6 +16,8 @@ public class CategoryResponse {
 
     private String description;
 
+    private String fullImageUrl;
+
     private RestaurantShortResponse restaurant;
 
 }

@@ -21,6 +21,5 @@ public class CategoryRequest {
 
     private MultipartFile file;
 
-    //private byte[] imageData;
 
 }

@@ -20,34 +20,27 @@ public class CategoryConverter {
 
     private final RestaurantRepository restaurantRepository;
     private final RestaurantConverter restaurantConverter;
-    private final MultipartFileToByteArrayConverter imageConverter;
 
-    public Category createCategory (Integer restaurantId, CategoryRequest request) {
+    public Category createCategory (Integer restaurantId, CategoryRequest request, byte[] imageData) {
 
-        try {
-            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new RestaurantNotExistException("Restaurant not found"));
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new RestaurantNotExistException("Restaurant not found"));
 
-            MultipartFile image = request.getFile();
-            byte[] imageData = imageConverter.convert(image);
-
-            return Category.builder()
-                    .restaurant(restaurant)
-                    .name(request.getName())
-                    .description(request.getDescription())
-                    .imageData(imageData)
-                    .build();
-        } catch (IOException e) {
-            throw new ImageConversionException("Error occurred during image conversion");
-        }
+        return Category.builder()
+                .restaurant(restaurant)
+                .name(request.getName())
+                .description(request.getDescription())
+                .imageData(imageData)
+                .build();
     }
 
-    public CategoryResponse toResponse (Category category) {
+    public CategoryResponse toResponse (Category category, String imageUrl) {
 
         return CategoryResponse.builder()
                 .id(category.getId())
+                .restaurant(restaurantConverter.toShortResponse(category.getRestaurant()))
                 .name(category.getName())
                 .description(category.getDescription())
-                .restaurant(restaurantConverter.toShortResponse(category.getRestaurant()))
+                .fullImageUrl(imageUrl)
                 .build();
     }
 }

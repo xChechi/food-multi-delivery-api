@@ -23,7 +23,6 @@ import java.util.zip.GZIPOutputStream;
 @AllArgsConstructor
 public class RestaurantConverter {
 
-    private final CompressBase64String compressBase64String;
     private final ReviewRepository reviewRepository;
 
     public Restaurant addRestaurant (RestaurantRequest request, byte[] imageData) {

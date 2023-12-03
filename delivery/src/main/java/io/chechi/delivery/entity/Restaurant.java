@@ -54,8 +54,8 @@ public class Restaurant {
     @NotNull
     private Double deliveryCost;
 
-    //@NotNull
-    //private Double reviewStat;
+    @NotNull
+    private Double reviewStat;
 
     @NotNull
     private Double minimumOrder;

@@ -22,10 +22,10 @@ public class RestaurantShortResponse {
 
     private Integer id;
 
-    @NotBlank
     private String name;
 
-    @NotBlank
     private String description;
+
+    private Double reviewStat;
 
 }

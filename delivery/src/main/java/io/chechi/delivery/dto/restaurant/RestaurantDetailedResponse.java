@@ -22,30 +22,22 @@ public class RestaurantDetailedResponse {
 
     private Integer id;
 
-    @NotBlank
     private String name;
 
-    @NotBlank
     private String description;
 
-    @NotBlank
     private String address;
 
-    @PhoneNumberValidation
     private String phoneNumber;
 
-    @Email
     private String email;
 
     private String imageUrl;
 
-    @NotNull
     private Double deliveryCost;
 
-    //@NotNull
-    //private Double reviewStat;
+    private Double reviewStat;
 
-    @NotNull
     private Double minimumOrder;
 
     private Duration deliveryTime;

@@ -9,13 +9,15 @@ import io.chechi.delivery.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @AllArgsConstructor
 public class ReviewConverter {
 
     private final RestaurantRepository restaurantRepository;
 
-    public Review addReview (ReviewRequest request, Integer restaurantId) {
+    public Review addReview (Integer restaurantId, ReviewRequest request) {
 
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new RestaurantNotExistException("Restaurant not found"));
 
@@ -23,6 +25,7 @@ public class ReviewConverter {
                 .restaurant(restaurant)
                 .stars(request.getStars())
                 .comment(request.getComment())
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 
@@ -32,6 +35,7 @@ public class ReviewConverter {
                 .id(review.getId())
                 .stars(review.getStars())
                 .comment(review.getComment())
+                .createdAt(review.getCreatedAt())
                 .build();
     }
 }

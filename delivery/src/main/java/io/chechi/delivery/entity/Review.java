@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "reviews")
 @AllArgsConstructor
@@ -30,6 +32,8 @@ public class Review {
     @NotBlank
     @Length(max = 255)
     private String comment;
+
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

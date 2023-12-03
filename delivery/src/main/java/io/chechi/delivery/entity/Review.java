@@ -1,9 +1,7 @@
 package io.chechi.delivery.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +24,8 @@ public class Review {
     private Integer id;
 
     @NotNull
-    @Size(min = 1, max = 5)
+    @Min(1)
+    @Max(5)
     private Integer stars;
 
     @NotBlank

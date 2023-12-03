@@ -1,5 +1,6 @@
 package io.chechi.delivery.dto.review;
 
+import io.chechi.delivery.dto.restaurant.RestaurantShortResponse;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,4 +19,6 @@ public class ReviewResponse {
     private String comment;
 
     private LocalDateTime createdAt;
+
+    private RestaurantShortResponse restaurant;
 }

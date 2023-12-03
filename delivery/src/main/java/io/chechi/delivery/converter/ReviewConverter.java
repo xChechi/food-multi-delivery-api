@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class ReviewConverter {
 
     private final RestaurantRepository restaurantRepository;
+    private final RestaurantConverter restaurantConverter;
 
     public Review addReview (Integer restaurantId, ReviewRequest request) {
 
@@ -36,6 +37,7 @@ public class ReviewConverter {
                 .stars(review.getStars())
                 .comment(review.getComment())
                 .createdAt(review.getCreatedAt())
+                .restaurant(restaurantConverter.toShortResponse(review.getRestaurant()))
                 .build();
     }
 }

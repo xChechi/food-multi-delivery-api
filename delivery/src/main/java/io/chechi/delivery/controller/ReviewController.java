@@ -28,7 +28,7 @@ public class ReviewController {
         return ResponseEntity.status(HttpStatus.FOUND).body(reviewService.findById(reviewId));
     }
 
-    @PostMapping("/restaurants/restaurantId")
+    @PostMapping("/restaurants/{restaurantId}")
     public ResponseEntity<ReviewResponse> addReview (@PathVariable Integer restaurantId, @RequestBody @Valid ReviewRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.addReview(restaurantId, request));
     }
@@ -49,12 +49,12 @@ public class ReviewController {
         return ResponseEntity.status(HttpStatus.FOUND).body(reviewService.findByRestaurant(restaurantId));
     }
 
-    @GetMapping("/restaurant/{restaurantId}/recent")
+    @GetMapping("/restaurants/{restaurantId}/recent")
     public ResponseEntity<List<ReviewResponse>> findRecentReviewsByRestaurant (@PathVariable Integer restaurantId) {
         return ResponseEntity.status(HttpStatus.FOUND).body(reviewService.findRecentlyReviewsByRestaurant(restaurantId));
     }
 
-    @GetMapping("/restaurant/{restaurantId}/stars/{stars}")
+    @GetMapping("/restaurants/{restaurantId}/stars/{stars}")
     public ResponseEntity<List<ReviewResponse>> findReviewsByStars (@PathVariable Integer restaurantId, @PathVariable Integer stars) {
         return ResponseEntity.status(HttpStatus.FOUND).body(reviewService.findByStarForRestaurant(restaurantId, stars));
     }

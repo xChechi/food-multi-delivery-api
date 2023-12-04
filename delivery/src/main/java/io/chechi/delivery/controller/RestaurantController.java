@@ -40,4 +40,9 @@ public class RestaurantController {
         restaurantService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(value = "/{restaurantId}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RestaurantDetailedResponse> updateRestaurant (@PathVariable Integer restaurantId, @ModelAttribute @RequestBody @Valid RestaurantRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(restaurantService.updateRestaurant(restaurantId, request));
+    }
 }

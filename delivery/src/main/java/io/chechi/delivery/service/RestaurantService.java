@@ -15,4 +15,6 @@ public interface RestaurantService {
     RestaurantDetailedResponse addRestaurant (RestaurantRequest request);
 
     void deleteById (Integer id);
+
+    RestaurantDetailedResponse updateRestaurant (Integer restaurantId, RestaurantRequest request);
 }

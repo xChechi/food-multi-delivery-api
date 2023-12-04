@@ -67,4 +67,36 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         restaurantRepository.deleteById(id);
     }
+
+    @Override
+    public RestaurantDetailedResponse updateRestaurant(Integer restaurantId, RestaurantRequest request) {
+        try {
+            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new RestaurantNotExistException("Restaurant not found"));
+
+            restaurant.setName(request.getName());
+            restaurant.setDescription(request.getDescription());
+            restaurant.setAddress(request.getAddress());
+            restaurant.setPhoneNumber(request.getPhoneNumber());
+            restaurant.setEmail(request.getEmail());
+            restaurant.setFile(request.getFile());
+            restaurant.setDeliveryCost(request.getDeliveryCost());
+            restaurant.setMinimumOrder(request.getMinimumOrder());
+            restaurant.setDeliveryTime(request.getDeliveryTime());
+
+            String imageUrl;
+            if (request.getFile() != null) {
+
+                imageUrl = saveImageToFile.saveToFile(restaurant.getId(), restaurant.getName(), request.getFile());
+
+            } else {
+                imageUrl = saveImageToFile.imageUrlFor(restaurant.getId(), restaurant.getName());
+            }
+
+            Restaurant savedRestaurant = restaurantRepository.save(restaurant);
+
+            return restaurantConverter.toResponse(savedRestaurant, imageUrl);
+        } catch (IOException e) {
+            throw new ImageConversionException("Error occurred during image conversion");
+        }
+    }
 }

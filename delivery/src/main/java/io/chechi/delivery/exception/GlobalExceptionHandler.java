@@ -29,4 +29,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handlerCategoryNotFound (CategoryNotFoundException message) {
         return new ResponseEntity<>(message.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ExtraNotFoundException.class)
+    public ResponseEntity<String> handlerExtraNotFound (ExtraNotFoundException message) {
+        return new ResponseEntity<>(message.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

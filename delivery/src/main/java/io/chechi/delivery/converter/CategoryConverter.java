@@ -2,6 +2,7 @@ package io.chechi.delivery.converter;
 
 import io.chechi.delivery.dto.category.CategoryRequest;
 import io.chechi.delivery.dto.category.CategoryResponse;
+import io.chechi.delivery.dto.category.CategoryShortResponse;
 import io.chechi.delivery.entity.Category;
 import io.chechi.delivery.entity.Restaurant;
 import io.chechi.delivery.exception.ImageConversionException;
@@ -41,6 +42,15 @@ public class CategoryConverter {
                 .name(category.getName())
                 .description(category.getDescription())
                 .fullImageUrl(imageUrl)
+                .build();
+    }
+
+    public CategoryShortResponse toShortResponse (Category category) {
+
+        return CategoryShortResponse.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .description(category.getDescription())
                 .build();
     }
 }

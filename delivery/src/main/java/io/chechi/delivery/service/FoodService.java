@@ -21,5 +21,4 @@ public interface FoodService {
 
     List<FoodResponse> searchByCategory (Integer categoryId);
 
-    List<FoodResponse> searchByRestaurantAndCategory (Integer restaurantId, Integer categoryId);
 }

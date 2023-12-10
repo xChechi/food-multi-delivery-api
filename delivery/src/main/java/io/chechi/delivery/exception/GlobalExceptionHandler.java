@@ -34,4 +34,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handlerExtraNotFound (ExtraNotFoundException message) {
         return new ResponseEntity<>(message.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(FoodNotFoundException.class)
+    public ResponseEntity<String> handlerFoodNotFound (FoodNotFoundException message) {
+        return new ResponseEntity<>(message.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

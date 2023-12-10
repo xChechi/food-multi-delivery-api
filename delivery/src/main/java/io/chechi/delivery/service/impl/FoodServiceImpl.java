@@ -3,9 +3,11 @@ package io.chechi.delivery.service.impl;
 import io.chechi.delivery.converter.FoodConverter;
 import io.chechi.delivery.dto.food.FoodRequest;
 import io.chechi.delivery.dto.food.FoodResponse;
+import io.chechi.delivery.entity.Extra;
 import io.chechi.delivery.entity.Food;
 import io.chechi.delivery.exception.FoodNotFoundException;
 import io.chechi.delivery.exception.ImageConversionException;
+import io.chechi.delivery.repository.ExtraRepository;
 import io.chechi.delivery.repository.FoodRepository;
 import io.chechi.delivery.service.FoodService;
 import io.chechi.delivery.util.MultipartFileToByteArrayConverter;
@@ -24,6 +26,7 @@ public class FoodServiceImpl implements FoodService {
     private final FoodConverter foodConverter;
     private final MultipartFileToByteArrayConverter imageConverter;
     private final SaveImageToFile saveImageToFile;
+    private final ExtraRepository extraRepository;
 
     @Override
     public List<FoodResponse> findAll() {
@@ -46,6 +49,7 @@ public class FoodServiceImpl implements FoodService {
             byte[] imageData = imageConverter.convert(request.getFile());
 
             Food food = foodConverter.addFood(categoryId, request, imageData);
+
             Food savedFood = foodRepository.save(food);
 
             String imageUrl = saveImageToFile.saveToFile(food.getId(), food.getName(), request.getFile());
